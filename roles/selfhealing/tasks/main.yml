@@ -13,7 +13,7 @@
     src: selfhealing/docker/
     dest: /tmp/ansible-respond-selfhealing/
 - name: Build docker image
-  community.general.docker_image:
+  community.docker.docker_image:
     name: respond-iot/selfhealing
     build:
       path: /tmp/ansible-respond-selfhealing
@@ -22,7 +22,7 @@
     state: present
     force_source: yes
 - name: Set up docker container
-  community.general.docker_container:
+  community.docker.docker_container:
     container_default_behavior: no_defaults
     name: respond-selfhealing
     image: respond-iot/selfhealing:latest

@@ -8,7 +8,7 @@
   community.docker.docker_network:
     name: mariadb
 - name: Start mariadb container
-  community.general.docker_container:
+  community.docker.docker_container:
     container_default_behavior: no_defaults
     networks_cli_compatible: yes
     name: mariadb
@@ -27,7 +27,7 @@
     src: process_repository/docker/
     dest: /tmp/ansible-respond-repository/
 - name: Build docker image
-  community.general.docker_image:
+  community.docker.docker_image:
     name: respond-iot/process-repository
     build:
       path: /tmp/ansible-respond-repository
@@ -36,7 +36,7 @@
     state: present
     force_source: yes
 - name: Set up docker container
-  community.general.docker_container:
+  community.docker.docker_container:
     container_default_behavior: no_defaults
     networks_cli_compatible: yes
     name: respond-process-repository

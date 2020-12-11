@@ -15,7 +15,7 @@
     src: mosquitto.conf.j2
     dest: /data/mosquitto/config/mosquitto.conf
 - name: Start container
-  community.general.docker_container:
+  community.docker.docker_container:
     container_default_behavior: no_defaults
     name: mosquitto
     image: eclipse-mosquitto:latest
