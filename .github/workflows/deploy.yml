@@ -27,8 +27,11 @@ jobs:
           directory: ./
           key: ${{ secrets.SSH_KEY_SERVER_IUMS }}
           inventory: |
+            [broker]
+            ${{ secrets.IUMS_SERVER_IP }} ansible_user=${{ secrets.IUMS_USER }} ansible_python_interpreter=python3
+
             [process_repository]
-            ${{ secrets.IUMS_SERVER_IP }} ansible_user=${{ secrets.IUMS_USER }}
+            ${{ secrets.IUMS_SERVER_IP }} ansible_user=${{ secrets.IUMS_USER }} ansible_python_interpreter=python3
 
             [selfhealing]
-            ${{ secrets.IUMS_SERVER_IP }} ansible_user=${{ secrets.IUMS_USER }}
+            ${{ secrets.IUMS_SERVER_IP }} ansible_user=${{ secrets.IUMS_USER }} ansible_python_interpreter=python3
