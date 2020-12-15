@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: Deploy to server
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -18,6 +18,10 @@ jobs:
         env:
           SECRET_PASSPHRASE: ${{ secrets.CONFIG_ENCRYPTION_KEY }}
           SECRET_NAME: 'config.yml'
+      - name: Add ansible PPA
+        run: sudo apt-add-repository ppa:ansible/ansible
+      - name: Upgrade ansible
+        run: sudo apt-get install ansible -y
       - name: Install ansible docker collection
         run: ansible-galaxy collection install community.docker
       - name: Run ansible
