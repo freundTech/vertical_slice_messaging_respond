@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     name: Deploy to server
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout code
@@ -18,10 +18,10 @@ jobs:
         env:
           SECRET_PASSPHRASE: ${{ secrets.CONFIG_ENCRYPTION_KEY }}
           SECRET_NAME: 'config.yml'
-      - name: Add ansible PPA
-        run: sudo apt-add-repository ppa:ansible/ansible
-      - name: Upgrade ansible
-        run: sudo apt-get install ansible -y
+      - name: Upgrade ansible if it is to old
+        run: pip3 install --user "ansible>=2.9.10"
+        env:
+          ANSIBLE_SKIP_CONFLICT_CHECK: 1 # We are installing as user and existing installation is on system, so we can ignore it
       - name: Install ansible docker collection
         run: ansible-galaxy collection install community.docker
       - name: Run ansible
